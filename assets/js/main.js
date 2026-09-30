@@ -431,6 +431,20 @@ $(function () {
   }
   $("#mailto-btn").on("click", () => { window.location.href = mailtoHref(formData()); });
 
+  // Google Form target, read from its "pre-filled link": each answer in that link is
+  // the website field key (name, email, ...), so key → entry.<id> can be derived.
+  const GFORM = (function (url) {
+    try {
+      const u = new URL(url), id = u.pathname.match(/\/forms\/d\/e\/([^/]+)\//);
+      if (!id) return null;
+      const fields = {};
+      u.searchParams.forEach((v, k) => { if (/^entry\.\d+$/.test(k) && LABELS[v.trim()]) fields[v.trim()] = k; });
+      const missing = Object.keys(LABELS).filter((k) => !fields[k]);
+      if (missing.length) console.warn("Google Form pre-filled link has no answer for:", missing.join(", "));
+      return Object.keys(fields).length ? { action: `https://docs.google.com/forms/d/e/${id[1]}/formResponse`, fields } : null;
+    } catch (e) { return null; }
+  })(D.contact.googleFormPrefilledUrl || "");
+
   $form.on("submit", function (e) {
     e.preventDefault();
     const d = formData();
@@ -438,18 +452,21 @@ $(function () {
     if (!validate()) return;
     const btn = $("#submit-btn").prop("disabled", true);
     btn.find("span").text("Sending…"); btn.find("i").attr("class", "fa-solid fa-spinner fa-spin");
-    const payload = { _subject: `${D.contact.subjectPrefix}: ${d.job_title} at ${d.company}`, _template: "table", _replyto: d.email, _captcha: "false" };
-    Object.keys(LABELS).forEach((k) => { if (d[k]) payload[LABELS[k]] = d[k]; });
-    $.ajax({ url: D.contact.formEndpoint, method: "POST", contentType: "application/json", dataType: "json", data: JSON.stringify(payload), timeout: 20000 })
-      .done((res) => {
-        if (res && (res.success === true || res.success === "true")) {
-          toast("Thanks! Your message has been sent.", "success");
-          status(`<i class="fa-solid fa-circle-check mr-1"></i>Thank you, ${esc(d.name)}! I've received the details for <b>${esc(d.job_title)}</b> and will get back to you at ${esc(d.email)} soon.`, "text-emerald-600 dark:text-emerald-400");
-          $form[0].reset(); $("#jd-count").text(0);
-        } else fail(res && res.message);
+    const done = () => { btn.prop("disabled", false); btn.find("span").text("Send Opportunity"); btn.find("i").attr("class", "fa-solid fa-paper-plane"); };
+    if (!GFORM) { done(); return fail("The contact form isn't configured yet."); }
+    const body = new URLSearchParams();
+    Object.keys(GFORM.fields).forEach((k) => { if (d[k]) body.append(GFORM.fields[k], d[k]); });
+    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 20000);
+    // Google Forms doesn't send CORS headers, so the response is opaque: a resolved
+    // request means Google received it; only network failures can be detected.
+    fetch(GFORM.action, { method: "POST", mode: "no-cors", body, signal: ctrl.signal })
+      .then(() => {
+        toast("Thanks! Your message has been sent.", "success");
+        status(`<i class="fa-solid fa-circle-check mr-1"></i>Thank you, ${esc(d.name)}! I've received the details for <b>${esc(d.job_title)}</b> and will get back to you at ${esc(d.email)} soon.`, "text-emerald-600 dark:text-emerald-400");
+        $form[0].reset(); $("#jd-count").text(0);
       })
-      .fail((xhr) => fail(xhr.responseJSON && xhr.responseJSON.message))
-      .always(() => { btn.prop("disabled", false); btn.find("span").text("Send Opportunity"); btn.find("i").attr("class", "fa-solid fa-paper-plane"); });
+      .catch(() => fail("The message couldn't be sent."))
+      .finally(() => { clearTimeout(timer); done(); });
     function fail(msg) {
       toast("Couldn't send the form", "error");
       status(`<i class="fa-solid fa-triangle-exclamation mr-1"></i>${esc(msg || "Something went wrong.")} Please <a class="underline font-semibold" href="${esc(mailtoHref(d))}">send it via your email app</a> or write to <a class="underline" href="mailto:${esc(P.email)}">${esc(P.email)}</a>.`, "text-rose-600 dark:text-rose-400");

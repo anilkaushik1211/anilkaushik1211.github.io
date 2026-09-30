@@ -34,17 +34,61 @@ Everything lives in `assets/js/data.js`:
 - **Skill durations** ("3 yrs 2 mos hands-on") are calculated from the tech stacks in `experience`, so they stay accurate as you update roles.
 - **Resume:** `assets/Anil_Kumar_Resume.pdf` is the global, generic resume. To update it, replace the file and keep the same name.
 
-## Contact form (sends email to you)
+## Contact form (Google Forms)
 
-The form posts to [FormSubmit](https://formsubmit.co), a free service that needs no backend or signup:
+"Send Opportunity" submits straight to a Google Form. Every submission becomes a form response, which you can view in Google Sheets and get emailed about.
 
-1. Deploy the site, open it, and submit the form once yourself.
-2. FormSubmit emails **anilkaushik1211@gmail.com** an activation link. Click it.
-3. From then on, every recruiter submission arrives in your inbox as a formatted table with their name, company, email, job title, location, work mode, salary, JD link and the full job description. Hitting Reply goes straight back to the recruiter.
+### 1. Create the form
 
-Optional: after activation, FormSubmit gives you a random alias string. Replace your email in `contact.formEndpoint` with that alias so your address isn't visible in the page source.
+Create a form at [forms.google.com](https://forms.google.com) with these questions, in this order. Make them all **Short answer** or **Paragraph**, not dropdowns or multiple choice, because Google rejects any value that doesn't exactly match one of the listed options.
 
-If sending ever fails, the form offers a "send via your email app" link with all the details pre-filled.
+| # | Question title | Type | Required | Key (used in step 3) |
+|---|---|---|---|---|
+| 1 | Recruiter Name | Short answer | Yes | `name` |
+| 2 | Work Email | Short answer | Yes | `email` |
+| 3 | Company | Short answer | Yes | `company` |
+| 4 | Phone / WhatsApp | Short answer | No | `phone` |
+| 5 | LinkedIn Profile | Short answer | No | `linkedin` |
+| 6 | Job Title | Short answer | Yes | `job_title` |
+| 7 | Job Location | Short answer | No | `job_location` |
+| 8 | Work Mode | Short answer | No | `work_mode` |
+| 9 | Employment Type | Short answer | No | `employment_type` |
+| 10 | Salary / Budget Range | Short answer | No | `salary` |
+| 11 | JD Link | Short answer | No | `jd_link` |
+| 12 | Job Description | Paragraph | Yes | `job_description` |
+| 13 | Additional Message | Paragraph | No | `message` |
+
+Leave out Google's "response validation" rules (the website already validates the email and URLs), because a rule the site doesn't enforce would silently drop that submission.
+
+### 2. Form settings
+
+In **Settings → Responses**:
+- **Collect email addresses:** *Do not collect*
+- **Limit to 1 response:** off
+- **Restrict to users in your organization** (Workspace accounts only): off
+
+If the form requires sign-in, anonymous submissions from the website are rejected.
+
+### 3. Connect it to the website
+
+1. In the form editor, open the **⋮** menu and choose **Get pre-filled link**.
+2. In each question, type its **key** from the table (`name`, `email`, `company`, and so on) as the answer.
+3. Click **Get link**, then **Copy link**.
+4. Paste it into `assets/js/data.js`:
+   ```js
+   contact: {
+     googleFormPrefilledUrl: "https://docs.google.com/forms/d/e/…/viewform?usp=pp_url&entry.123=name&…",
+   ```
+   The site reads the `entry.<id>` for each field from that link. If a key is missing, the browser console warns you which one.
+
+### 4. Get notified
+
+- **Email:** in the form, go to **Responses → ⋮ → Get email notifications for new responses**.
+- **Spreadsheet:** go to **Responses → Link to Sheets** to collect every opportunity in one sheet.
+
+Test it by submitting the form on the live site and checking the Responses tab.
+
+Note: Google Forms doesn't allow cross-site reads, so the website can only detect network failures, not rejected submissions (for example, a required question in the form that the site left empty). Keep the form's required questions matching the table. If sending fails, the site offers a pre-filled email as a fallback.
 
 ## Deploy to GitHub Pages
 
@@ -72,7 +116,7 @@ Then on GitHub go to **Settings → Pages → Build and deployment**, set **Sour
 - An animated experience timeline with company logos, dates and durations, expandable achievements, tech-stack chips, a multi-select tech filter and links to projects
 - Project cards with search, category filter, tech-stack filter, a details modal, and links back to the related role
 - Education, plus optional certifications, awards and recommendations sections that appear once you add entries
-- A recruiter contact form with validation, a spam honeypot, a character counter and a mailto fallback
+- A recruiter contact form that submits to Google Forms, with validation, a spam honeypot, a character counter and a mailto fallback
 - Dark and light theme (remembered per visitor), a scroll progress bar, active-section nav highlighting, a mobile menu and a back-to-top button
 - SEO meta tags, Open Graph tags and schema.org `Person` structured data
 - A print stylesheet, so Ctrl+P produces a clean resume-style printout

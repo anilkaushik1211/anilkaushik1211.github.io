@@ -361,11 +361,13 @@ window.PORTFOLIO = {
   languages: [ { name: "English", level: "Professional working proficiency" } ],
   interests: [],                      // e.g. ["Open source", "Chess", "Travel"]
 
-  /* ---------------- Contact form ----------------
-     Uses FormSubmit (free, no backend needed). The FIRST submission sends an
-     activation email to this address — click the link in it once. */
+  /* ---------------- Contact form → Google Form ----------------
+     Paste the Google Form "pre-filled link" (see README → Contact form). When making
+     it, type each question's key as its answer:
+       name, email, company, phone, linkedin, job_title, job_location,
+       work_mode, employment_type, salary, jd_link, job_description, message */
   contact: {
-    formEndpoint: "https://formsubmit.co/ajax/anilkaushik1211@gmail.com",
-    subjectPrefix: "New opportunity via portfolio"
+    googleFormPrefilledUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc4BoL0wgSowgHir7uoAJI2EAs95NEnXAswCxFeMcPtBUsLzQ/viewform?usp=pp_url&entry.215384723=name&entry.222045321=email&entry.1877487010=company&entry.1144140003=phone&entry.434752395=linkedin&entry.384483192=job_title&entry.106552750=job_location&entry.305157300=work_mode&entry.1279567420=employment_type&entry.894816270=salary&entry.1922705606=jd_link&entry.1248630744=job_description&entry.1621411282=message",
+    subjectPrefix: "New opportunity via portfolio"   // used for the email-app fallback
   }
 };
