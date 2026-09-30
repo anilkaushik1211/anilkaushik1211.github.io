@@ -33,6 +33,7 @@ Everything lives in `assets/js/data.js`:
 - **Company logos:** set `logo: "assets/img/allgovision.png"`. If you leave it empty, the site uses the company website's icon, and if that fails it shows a coloured initials badge.
 - **Skill durations** ("3 yrs 2 mos hands-on") are calculated from the tech stacks in `experience`, so they stay accurate as you update roles.
 - **Resume:** `assets/Anil_Kumar_Resume.pdf` is the global, generic resume. To update it, replace the file and keep the same name.
+- **After any change:** bump the `?v=...` number on the three asset links at the top and bottom of `index.html` (for example `?v=20261001` to `?v=20261015`). GitHub Pages lets browsers cache files for 10 minutes, and a new number makes returning visitors download the updated CSS and JS instead of mixing old and new files.
 
 ## Contact form (Google Forms)
 
