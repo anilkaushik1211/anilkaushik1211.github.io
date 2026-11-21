@@ -71,6 +71,7 @@ window.PORTFOLIO = {
     "Microservices": "fa-solid fa-cubes",
     "JWT Auth": "fa-solid fa-key",
     "Kafka": "devicon-apachekafka-original colored",
+    "AWS SQS": "fa-solid fa-envelopes-bulk",
     "PostgreSQL": "devicon-postgresql-plain colored",
     "MongoDB": "devicon-mongodb-plain colored",
     "MySQL": "devicon-mysql-plain colored",
@@ -113,7 +114,7 @@ window.PORTFOLIO = {
   /* ---------------- Technical skills ---------------- */
   skills: [
     { category: "Backend", icon: "fa-solid fa-server", items: ["Java", "Spring Boot", "Spring", "Hibernate/JPA", "REST APIs", "Web Services", "WebSockets", "Microservices", "NestJS", "Node.js", "JWT Auth"] },
-    { category: "Data & Messaging", icon: "fa-solid fa-database", items: ["Kafka", "PostgreSQL", "MongoDB", "MySQL", "SQL Server", "SQL"] },
+    { category: "Data & Messaging", icon: "fa-solid fa-database", items: ["Kafka", "AWS SQS", "PostgreSQL", "MongoDB", "MySQL", "SQL Server", "SQL"] },
     { category: "DevOps & Cloud", icon: "fa-solid fa-cloud", items: ["Docker", "Jenkins", "Maven", "Git", "CI/CD", "AWS", "Nginx", "Linux"] },
     { category: "Frontend", icon: "fa-solid fa-palette", items: ["TypeScript", "Angular", "JavaScript", "HTML5", "CSS3", "SCSS", "Angular Material", "Bootstrap"] },
     { category: "Architecture", icon: "fa-solid fa-sitemap", items: ["Distributed Systems", "Event-Driven Architecture", "System Design", "Design Patterns", "OOP", "API Integration", "Performance Optimization"] },
@@ -129,13 +130,13 @@ window.PORTFOLIO = {
       company: "RxLogix",
       short: "RxLogix",
       logo: "", domain: "rxlogix.com",
-      role: "Technical Lead",
+      role: "Technical Lead, Engineering",
       location: "Noida, India",
       start: "2026-11", end: "Present",
       dates: "16 Nov 2026 – Present",
-      summary: "Joined RxLogix as Technical Lead in November 2026.",
+      summary: "Joined RxLogix as Technical Lead, Engineering in November 2026, working with Java, Spring Boot, Angular, PostgreSQL and AWS (including SQS).",
       achievements: [],
-      tech: [],
+      tech: ["Java", "Spring Boot", "Angular", "PostgreSQL", "Jenkins", "Maven", "AWS", "AWS SQS"],
       projects: []
     },
     {
