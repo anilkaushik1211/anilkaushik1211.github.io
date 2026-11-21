@@ -15,10 +15,10 @@ window.PORTFOLIO = {
       "Senior Software Engineer (Java)",
       "Spring Boot & Microservices",
       "Kafka & Event-Driven Systems",
-      "Lead Engineer · Team of 7"
+      "Technical Lead @ RxLogix"
     ],
     tagline: "I build Spring Boot back ends, REST APIs and event-driven microservices — taking products from concept to production with a focus on performance, reliability and code quality.",
-    location: "Bangalore, India",
+    location: "Noida, India",
     relocation: "Open to relocation worldwide",
     email: "anilkaushik1211@gmail.com",
     phone: "+91 82953 65957",            // set "" to hide your phone number
@@ -31,11 +31,11 @@ window.PORTFOLIO = {
       { label: "Email", icon: "fa-solid fa-envelope", url: "mailto:anilkaushik1211@gmail.com" }
     ],
     summary: [
-      "Senior Java engineer with 8 years of experience building REST APIs, web services and microservices with Spring Boot and PostgreSQL. I currently lead a team of 5 developers and 2 testers on Analytics Center, a real-time analytics and monitoring platform built on distributed services with Kafka, Docker and AWS.",
+      "Senior Java engineer with 8 years of experience building REST APIs, web services and microservices with Spring Boot and PostgreSQL. I'm now a Technical Lead at RxLogix. Previously, at AllGoVision, I led a team of 5 developers and 2 testers on Analytics Center, a real-time analytics and monitoring platform built on distributed services with Kafka, Docker and AWS.",
       "Product-minded engineer who takes features from concept to delivery, leads technical design discussions, mentors engineers and owns production issues through root-cause analysis — always with scalable, maintainable code and the end user in mind."
     ],
     highlights: [
-      "Lead a team of 5 developers & 2 testers",
+      "Led a team of 5 developers & 2 testers",
       "Event-driven architecture with Kafka",
       "Real-time alerting over WebSockets",
       "CI/CD with Jenkins, Docker & AWS",
@@ -47,7 +47,7 @@ window.PORTFOLIO = {
   /* ---------------- Open-to-work banner ---------------- */
   openToWork: {
     enabled: true,
-    headline: "Open to work across the globe",
+    headline: "Open to global opportunities",
     roles: ["Senior Software Engineer (Java)", "Lead / Senior Backend Engineer", "Senior Full Stack Engineer (Java + Angular)"],
     workModes: ["Relocation", "Remote", "Hybrid", "On-site"],
     regions: ["Worldwide", "Netherlands", "Ireland", "Europe", "UK", "India", "Remote"],
@@ -125,22 +125,37 @@ window.PORTFOLIO = {
      and if that fails a coloured initials badge is shown. */
   experience: [
     {
+      id: "exp-rxlogix",
+      company: "RxLogix",
+      short: "RxLogix",
+      logo: "", domain: "rxlogix.com",
+      role: "Technical Lead",
+      location: "Noida, India",
+      start: "2026-11", end: "Present",
+      dates: "16 Nov 2026 – Present",
+      summary: "Joined RxLogix as Technical Lead in November 2026.",
+      achievements: [],
+      tech: [],
+      projects: []
+    },
+    {
       id: "exp-allgovision",
       company: "AllGoVision Technologies Pvt. Ltd.",
       short: "AllGoVision",
       logo: "", domain: "allgovision.com",
       role: "Lead Engineer",
       location: "Bangalore, India",
-      start: "2023-08", end: "Present",
-      summary: "Own Java Spring Boot and NestJS services for Analytics Center, a real-time analytics and monitoring platform for alarm management and data analysis — and lead a team of 5 developers and 2 testers.",
+      start: "2023-08", end: "2026-11",
+      dates: "Aug 2023 – 13 Nov 2026",
+      summary: "Owned Java Spring Boot and NestJS services for Analytics Center, a real-time analytics and monitoring platform for alarm management and data analysis — and led a team of 5 developers and 2 testers.",
       achievements: [
-        "Build and own Spring Boot and NestJS services and REST APIs for Analytics Center, from requirements through production.",
-        "Design scalable distributed services using Kafka and PostgreSQL, leading technical decisions on architecture and API design.",
-        "Deliver interactive dashboards and real-time alerting, pushing new alerts to the UI over WebSockets so operators can act immediately.",
-        "Automate builds with Jenkins, containerize services with Docker and deploy on AWS.",
-        "Lead and mentor 5 developers and 2 testers: code reviews, coaching, and testing & CI/CD practices that keep releases on schedule.",
-        "Resolve complex production issues through structured troubleshooting and root-cause analysis.",
-        "Use Cursor AI IDE and GitHub Copilot to speed up coding and tests, reviewing every change."
+        "Built and owned Spring Boot and NestJS services and REST APIs for Analytics Center, from requirements through production.",
+        "Designed scalable distributed services using Kafka and PostgreSQL, leading technical decisions on architecture and API design.",
+        "Delivered interactive dashboards and real-time alerting, pushing new alerts to the UI over WebSockets so operators could act immediately.",
+        "Automated builds with Jenkins, containerized services with Docker and deployed on AWS.",
+        "Led and mentored 5 developers and 2 testers: code reviews, coaching, and testing & CI/CD practices that kept releases on schedule.",
+        "Resolved complex production issues through structured troubleshooting and root-cause analysis.",
+        "Used Cursor AI IDE and GitHub Copilot to speed up coding and tests, reviewing every change."
       ],
       tech: ["Java", "Spring Boot", "Hibernate/JPA", "Maven", "NestJS", "PostgreSQL", "Kafka", "WebSockets", "Docker", "Jenkins", "AWS", "Angular"],
       projects: ["proj-analytics"]
@@ -226,7 +241,7 @@ window.PORTFOLIO = {
     {
       id: "proj-analytics", title: "Analytics Center", role: "Lead Engineer", company: "AllGoVision Technologies",
       experienceId: "exp-allgovision", category: "Analytics & Monitoring", icon: "fa-solid fa-chart-line", featured: true,
-      start: "2023-08", end: "Present",
+      start: "2023-08", end: "2026-11",
       description: "Unified web platform for managing alarms and data analytics with modular, customizable features.",
       highlights: [
         "Led development and deployment, ensuring high performance and reliability.",

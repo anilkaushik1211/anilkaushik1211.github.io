@@ -67,7 +67,7 @@ $(function () {
   /* ---------------- open-to-work banner ---------------- */
   const O = D.openToWork;
   if (O && O.enabled) {
-    $("#otw-title").text("Open to Work");
+    $("#otw-title").text("Open to opportunities");
     $("#hero-status").text(O.headline);
     const items = [`<span><i class="fa-solid fa-earth-americas"></i><b>${esc(O.headline)}</b></span>`,
       `<span><i class="fa-solid fa-briefcase"></i>${O.roles.map(esc).join(" · ")}</span>`,
@@ -391,8 +391,8 @@ $(function () {
         ${c.href ? `<a href="${esc(c.href)}" ${/^http/.test(c.href) ? 'target="_blank" rel="noopener"' : ""} class="block truncate font-medium text-slate-900 dark:text-white hover:text-brand-500">${esc(c.v)}</a>` : `<div class="font-medium text-slate-900 dark:text-white">${esc(c.v)}</div>`}</div>
       ${c.copy ? `<button class="icon-btn copy-btn" data-copy="${esc(c.copy)}" title="Copy"><i class="fa-regular fa-copy"></i></button>` : ""}
     </div>`).join("") + (O && O.enabled ? `
-    <div class="card p-5 border-emerald-500/30">
-      <div class="flex items-center gap-2 font-semibold text-emerald-600 dark:text-emerald-400"><span class="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>${esc(O.headline)}</div>
+    <div class="card p-5">
+      <div class="flex items-center gap-2 font-semibold text-brand-600 dark:text-brand-400"><i class="fa-solid fa-earth-americas"></i>${esc(O.headline)}</div>
       <div class="mt-3 flex flex-wrap gap-2">${O.regions.map((r) => `<span class="chip"><i class="fa-solid fa-location-dot"></i>${esc(r)}</span>`).join("")}</div>
       <div class="mt-3 text-sm text-slate-500 dark:text-slate-400"><i class="fa-solid fa-briefcase mr-1.5"></i>${O.roles.map(esc).join(" · ")}</div>
     </div>` : ""));
